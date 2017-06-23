@@ -16,7 +16,7 @@ public:
   bool insert(string key, int value);
 
   // returns true on success
-  bool delete(string key);
+  bool remove(string key);
 
   // returns value of key
   string value(string key);
@@ -38,4 +38,4 @@ private:
   // minimum and maximum loads
   double max = 0.75;
   double min = 0.25;
-}
+};
