@@ -10,3 +10,8 @@ hashtable::hashtable() {
 	entries = 0;
 	buckets = 1;
 }
+
+// delete table
+hashtable::~hashtable() {
+	delete[] table;
+}
