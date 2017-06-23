@@ -21,12 +21,6 @@ public:
   // returns value of key
   string value(string key);
 
-  // doubles size of table
-  void grow();
-
-  // halves size of table
-  void shrink();
-
 private:
 
   // the table, an array of lists - or buckets
@@ -38,4 +32,10 @@ private:
   // minimum and maximum loads
   double max = 0.75;
   double min = 0.25;
+
+  // doubles size of table
+  void grow();
+
+  // halves size of table
+  void shrink();
 };
