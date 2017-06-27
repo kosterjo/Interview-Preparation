@@ -1,7 +1,9 @@
+#ifndef _HASHTABLE_H
+#define _HASHTABLE_H
+
+#include "datum.h"
 #include <list>
 #include <string>
-
-using namespace std;
 
 class hashtable {
 public:
@@ -13,18 +15,18 @@ public:
   ~hashtable();
 
   // returns true on success
-  bool insert(string key, int value);
+  bool insert(std::string key, int value);
 
   // returns true on success
-  bool remove(string key);
+  bool remove(std::string key);
 
   // returns value of key
-  string value(string key);
+  std::string value(std::string key);
 
 private:
 
   // the table, an array of lists - or buckets
-  list<string>* table;
+  datum* tabl;
 
   // number of entries and buckets
   int entries, buckets;
@@ -39,3 +41,5 @@ private:
   // halves size of table
   void shrink();
 };
+
+#endif
