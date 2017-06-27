@@ -26,7 +26,7 @@ public:
 private:
 
   // the table, an array of lists - or buckets
-  datum* tabl;
+  datum* table;
 
   // number of entries and buckets
   int entries, buckets;
