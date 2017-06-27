@@ -26,7 +26,14 @@ bool hashtable::insert(string key, int value) {
 	int table_index = hash % buckets;
 
 	// iterate over list to ensure key doesn't already exist
-	list<datum>::iterator it;
+	for (auto& it : *(table + table_index))
+		if (not key.compare(it.key)) return false;
 
-	it = *(table + table_index).begin();
+	datum new_data;
+	new_data.key = key;
+	new_data.value = value;
+
+	(table + table_index)->push_back(new_data);
+
+	return true;
 }
