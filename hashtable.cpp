@@ -35,6 +35,9 @@ bool hashtable::insert(string key, int value) {
 	// increment num entries in hashtable
 	entries++;
 
+	// if load too high, increase size of table
+	if ((entries / buckets) > max) grow();
+
 	return true;
 }
 
@@ -47,6 +50,9 @@ bool hashtable::remove(string key) {
 		if (not key.compare(it->key)) {
 			bucket->erase(it);
 			entries--;
+
+			// if load low enough, free memory by shrinking table
+			if ((entries / buckets) < min) shrink();
 
 			// successfully removed element
 			return true;
@@ -75,4 +81,12 @@ list<datum>* hashtable::get_bucket(string key) {
 	int index = hash_fn(key) % buckets;
 
 	return table + index;
+}
+
+void hashtable::grow() {
+	return;
+}
+
+void hashtable::shrink() {
+	return;
 }
