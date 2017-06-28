@@ -84,6 +84,13 @@ list<datum>* hashtable::get_bucket(string key) {
 }
 
 void hashtable::grow() {
+	// keep pointer to old data and create new table twice as large
+	list<datum>* old_data = table;
+	list<datum>* table = new list<datum>[2*buckets];
+
+	// delete old table
+	delete[] old_data;
+
 	return;
 }
 
