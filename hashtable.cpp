@@ -51,7 +51,7 @@ bool hashtable::remove(string key) {
 }
 
 // return the hash of a given key
-int key_index(string key) {
+int hashtable::key_index(string key) {
 	hash<string> hash_fn;
 
 	int index = hash_fn(key) % buckets;
