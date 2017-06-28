@@ -21,7 +21,7 @@ public:
   bool remove(std::string key);
 
   // returns value of key
-  std::string value(std::string key);
+  int value(std::string key);
 
 private:
 
@@ -34,6 +34,8 @@ private:
   // minimum and maximum loads
   double max = 0.75;
   double min = 0.25;
+
+  size_t gen_hash(std::string key);
 
   // doubles size of table
   void grow();

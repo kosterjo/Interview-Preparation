@@ -1,7 +1,7 @@
 EXEC   = hashtest
 CFLAGS = -std=c++11 -c
 LFLAGS = -std=c++11
-OBJS   = hashtable.o 
+OBJS   = hashtable.o
 
 hashtable.o: hashtable.cpp
 	g++ hashtable.cpp $(CFLAGS)
