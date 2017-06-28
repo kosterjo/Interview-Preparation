@@ -38,8 +38,19 @@ bool hashtable::insert(string key, int value) {
 }
 
 bool hashtable::remove(string key) {
-	size_t hash = gen_hash(key);
+	// calculate bucket index corresponding to the key
+	size_t hash     = gen_hash(key);
+	int table_index = hash % buckets;
 
+	// iterate over bucket and erase key value datum
+	for (list<datum>::iterator it = (table + table_index)->begin(); it != (table + table_index)->end(); it++) {
+		if (not key.compare(it->key)) {
+			(table + table_index)->erase(it);
+			return true;
+		}
+	}
+	
+	// if key doesn't exist, return false
 	return false;
 }
 
