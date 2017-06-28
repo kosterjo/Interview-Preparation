@@ -21,8 +21,11 @@ bool hashtable::insert(string key, int value) {
 	// generate bucket index of key
 	int table_index = key_index(key);
 
+	// pointer to key's bucket
+	list<datum>* bucket = table + table_index;
+
 	// iterate over list to ensure key doesn't already exist
-	for (auto& it : *(table + table_index))
+	for (auto& it : *bucket)
 		if (not key.compare(it.key)) return false;
 
 	// add new entry to hashtable
@@ -30,7 +33,7 @@ bool hashtable::insert(string key, int value) {
 	new_data.key = key;
 	new_data.value = value;
 
-	(table + table_index)->push_back(new_data);
+	bucket->push_back(new_data);
 
 	// increment num entries in hashtable
 	entries++;
@@ -42,10 +45,13 @@ bool hashtable::remove(string key) {
 	// calculate bucket index corresponding to the key
 	int table_index = key_index(key);
 
+	// pointer to key's bucket
+	list<datum>* bucket = table + table_index;
+
 	// iterate over bucket and erase key value datum
-	for (list<datum>::iterator it = (table + table_index)->begin(); it != (table + table_index)->end(); it++) {
+	for (list<datum>::iterator it = bucket->begin(); it != bucket->end(); it++) {
 		if (not key.compare(it->key)) {
-			(table + table_index)->erase(it);
+			bucket->erase(it);
 			entries--;
 
 			// successfully removed element
