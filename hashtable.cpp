@@ -59,6 +59,13 @@ bool hashtable::remove(string key) {
 
 int hashtable::value(string key) {
 	list<datum>* bucket = get_bucket(key);
+
+	// iterate over bucket, looking for correct key
+	for (auto& it : *bucket) 
+		if (not key.compare(it.key)) return it.value;
+
+	// if no match, return 0
+	return 0;
 }
 
 // return the bucket of a given key
