@@ -35,7 +35,7 @@ private:
   double max = 0.75;
   double min = 0.25;
 
-  int key_index(std::string key);
+  std::list<datum>* get_bucket(std::string key);
 
   // doubles size of table
   void grow();
