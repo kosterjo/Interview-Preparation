@@ -18,11 +18,8 @@ hashtable::~hashtable() {
 }
 
 bool hashtable::insert(string key, int value) {
-	// generate hash for key
-	size_t hash = gen_hash(key);
-
-	// mod by table size to generate index
-	int table_index = hash % buckets;
+	// generate bucket index of key
+	int table_index = key_index(key);
 
 	// iterate over list to ensure key doesn't already exist
 	for (auto& it : *(table + table_index))
@@ -39,8 +36,7 @@ bool hashtable::insert(string key, int value) {
 
 bool hashtable::remove(string key) {
 	// calculate bucket index corresponding to the key
-	size_t hash     = gen_hash(key);
-	int table_index = hash % buckets;
+	int table_index = key_index(key);
 
 	// iterate over bucket and erase key value datum
 	for (list<datum>::iterator it = (table + table_index)->begin(); it != (table + table_index)->end(); it++) {
@@ -55,8 +51,10 @@ bool hashtable::remove(string key) {
 }
 
 // return the hash of a given key
-size_t gen_hash(string key) {
+int key_index(string key) {
 	hash<string> hash_fn;
 
-	return hash_fn(key);
+	int index = hash_fn(key) % buckets;
+
+	return index;
 }

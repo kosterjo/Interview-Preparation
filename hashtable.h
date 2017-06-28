@@ -35,7 +35,7 @@ private:
   double max = 0.75;
   double min = 0.25;
 
-  size_t gen_hash(std::string key);
+  int key_index(std::string key);
 
   // doubles size of table
   void grow();
