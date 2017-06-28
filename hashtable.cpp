@@ -25,11 +25,15 @@ bool hashtable::insert(string key, int value) {
 	for (auto& it : *(table + table_index))
 		if (not key.compare(it.key)) return false;
 
+	// add new entry to hashtable
 	datum new_data;
 	new_data.key = key;
 	new_data.value = value;
 
 	(table + table_index)->push_back(new_data);
+
+	// increment num entries in hashtable
+	entries++;
 
 	return true;
 }
@@ -42,6 +46,9 @@ bool hashtable::remove(string key) {
 	for (list<datum>::iterator it = (table + table_index)->begin(); it != (table + table_index)->end(); it++) {
 		if (not key.compare(it->key)) {
 			(table + table_index)->erase(it);
+			entries--;
+
+			// successfully removed element
 			return true;
 		}
 	}
