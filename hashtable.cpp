@@ -21,6 +21,8 @@ bool hashtable::insert(string key, int value) {
 	// get bucket corresponding to the key
 	list<datum>* bucket = get_bucket(key);
 
+	cout << bucket << endl;
+
 	// iterate over list to ensure key doesn't already exist
 	for (auto& it : *bucket)
 		if (not key.compare(it.key)) return false;
@@ -85,11 +87,30 @@ list<datum>* hashtable::get_bucket(string key) {
 
 void hashtable::grow() {
 	// keep pointer to old data and create new table twice as large
-	list<datum>* old_data = table;
-	list<datum>* table = new list<datum>[2*buckets];
+	list<datum>* old_table = table;
+	table = new list<datum>[2*buckets];
+
+	buckets *= 2;
+
+	/*for (int i = 0; i < buckets / 2; i++) {
+		list<datum>* old_bucket = old_table + i;
+
+		// iterate over bucket, looking for correct key
+		for (auto& it : *old_bucket) {
+			list<datum>* new_bucket = get_bucket(it.key);
+
+			// add new entry to hashtable
+			datum new_data;
+			new_data.key = it.key;
+			new_data.value = it.value;
+
+			new_bucket->push_back(new_data);
+		}
+			
+	}*/
 
 	// delete old table
-	delete[] old_data;
+	delete[] old_table;
 
 	return;
 }
